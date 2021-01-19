@@ -1,0 +1,114 @@
+﻿@model IEnumerable<TrailerModels.AuditTrail>
+
+@{
+    ViewBag.Title = "Audit Trail";
+
+}
+
+<script>
+    $(function () {
+        $(".datepicker").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+</script>
+
+<form method="post">
+    <div class="editor-label">
+        @Html.Label("Start", htmlAttributes: new { @class = "control-label" })
+    </div>
+
+    <div class="editor-field">
+
+        @Html.TextBox("Start", "", htmlAttributes: new { @class = "datepicker" })
+        @Html.ValidationMessage("Start", "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="editor-label">
+        @Html.Label("End", htmlAttributes: new { @class = "control-label" })
+    </div>
+
+    <div class="editor-field">
+        @Html.TextBox("End", "", htmlAttributes: new { @class = "datepicker" })
+        @Html.ValidationMessage("End", "", new { @class = "text-danger" })
+    </div>
+
+    <p>
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </p>
+
+</form>
+
+<table class="table" style="table-layout:fixed;width:100% !important;">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Action)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.EntityType)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AuditDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalEntity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NewEntity)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Action)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntityType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuditDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OriginalEntity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewEntity)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('table').DataTable({
+            "paging": false,
+            "info": true,
+            "dom": '<"toolbar">frtip'
+        });
+
+        $("div.toolbar").css("display", "inline");
+
+
+    });
+
+</script>
